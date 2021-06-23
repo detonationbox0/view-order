@@ -186,7 +186,7 @@ function showDetails(jDom, theOrder) {
     */
     
     // NO SLIDE
-        // Hide the filter area
+        // Hide the filter area  
         $("#hist-filter-area").hide();
 
         // Hide Order History header
