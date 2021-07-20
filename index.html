@@ -9,9 +9,27 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
 
+        <!-- Datepicker -->
+        <link rel="stylesheet" href="js/jquery-datepicker/jquery-ui.min.css">
+
+        <!-- Select2 -->
+        <!-- https://select2.org/getting-started/basic-usage -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        
+
     </head>
 
     <body>
+        <div id="fo">
+            <div id="fo-content">
+                <!--
+                    SCRATCH PAD -----------------------------------------------------------------------------------------↓
+                -->
+            
+
+
+            </div>
+        </div>
         <div id="order_store"></div>
         <div id="container">
 
@@ -87,7 +105,8 @@
                                 <p>Your shopping cart is empty!</p>
                             </div>
                             <div class="od-btn" id="od-btn-place">Place My Order</div>
-                            <div class="od-btn" id="od-btn-cont">Continue Shopping</div>
+                            <div class="od-btn de-emph" id="od-btn-cont">Continue Shopping</div>
+                            <div class="od-btn de-emph od-btn-history" id="hist-cart">Order History</div>
                         </div>
     
                     </div>
@@ -103,70 +122,86 @@
                         
                         <div id="hist-head">
                             <span id="hist-head-link">Order History</span>
+                            <div class="filter-area">
+                                <div class="filter-control hidden-control search-control">
+                                    <input type="text" id="search-text" placeholder="Search orders...">
+                                    <button class="custom-button" id="search-button">Search</button>
+                                </div>
+                                <!-- <span id="sort">Sort By:</span>
+                                <div class="filter-link">Date</div>
+                                <div class="filter-link">Search</div>
+                                <div class="filter-link">Store</div>
+                                <div class="filter-link">Product</div>
+                                <div class="filter-content-area"> -->
+                                    <!-- <div class="filter-item">From: <input type="text" class="datepickers" id="from-picker"></input></div>
+                                    <div class="filter-item">To: <input type="text" class="datepickers" id="to-picker"></input></div>
+                                </div> -->
+                            </div>
+  
                         </div>
+                        <div class="date-controls">
+                            <div class="filter-control date-control">
+                                <p class="filter-name"><span class="num-orders">0</span> Orders Placed in...</p>
+                                <select id="date-sel">
+                                    <option value="7">Last Week</option>
+                                    <option value="30">Last 30 Days</option>
+                                </select>
+                            </div>
+                            <button class="custom-button" id="filter-date-button">Custom Filter</button>
 
-                        <div id="hist-orders-view">
-                            <div id="hist-filter-area">
-                                <div class="filter-area">
-                                    <input type="text" placeholder="Search..."/>
+                        </div>
+                        <div class="fly-down-dates">
+                            <div class="custom-date-controls">
+                                <div class="filter-control date-control">
+                                    <p class="filter-name">Start Date</p>
+                                    <input type="text" class="datepicker">
+                                </div>
+                                <div class="filter-control date-control">
+                                    <p class="filter-name">End Date</p>
+                                    <input type="text" class="datepicker">
                                 </div>
                             </div>
-                            <div id="hist-orders">
 
-                                <!-- Staging the order
-                                Once I have the order's DOM structure and CSS coded
-                                these will be populated by the script.
+
+                        </div>                    
+                        <div id="hist-orders-view">
+
+                            <div id="hist-orders">
+                                <!--
+                                    SCRATCH PAD -----------------------------------------------------------------------------------------↓
                                 -->
-                                <!-- <div class="order">
-                                    <h4 class="order-title">Order #123048</h4>
+                                <!-- <div class="order" id="${_orders[i].orderNum}">
+                                    <h4 class="order-title">Order #${_orders[i].orderNum}</h4>
                                     <div class="order-content">
                                         <div class="order-left">
                                             <div class="order-left-details">
-                                                <p class="order-detail stat">Status: <span class="prop">Placed</span></p>
-                                                <p class="order-detail date">Placed <span class="prop">6/17/21</span> at <span class="prop">3:01pm</span></p>
-                                                <p class="order-detail items"><span class="prop">6</span> Item(s) <span class="view-items link">Show Items</span></p>
-                                                <div class="items-details">
-                                                    <p class="item-container"><span class="item">New! 2 Toppings. 12 Slices. Box Topper</span> <span class="item-view link">View Details</span></p>
-                                                    <p class="item-container"><span class="item">30" x 40" Interior Pizza Bowls Window Cling</span> <span class="item-view link">View Details</span></p>
-                                                    <p class="item-container"><span class="item">24" x 36" Cut Carbs Into Tasty Pieces Poster</span> <span class="item-view link">View Details</span></p>
-                                                    <p class="item-container"><span class="item">New! Now Hiring (Red Hat) Box Topper</span> <span class="item-view link">View Details</span></p>
-                                                </div>
+                                                <p class="order-detail stat">Status: <span class="prop">${_orders[i].orderStat}</span></p>
+                                                <p class="order-detail date">Placed <span class="prop">${_orders[i].orderDay}, ${_orders[i].orderMonth} ${_orders[i].orderDayNum}, ${_orders[i].orderYear}</span> at <span class="prop">${_orders[i].orderTime}</span></p>
+                        
                                             </div>
                                         </div>
-                                    </div> -->
-                                    <!-- <div class="order-details">
-                                        <div class="itm-bucket">
-                                            <div class="itm-thumb">
-                                                <img src="./js/Artwork_1_23155-8003_91_91_893.jpg" class="img-thumb" alt="">
-                                            </div>
-                                            <div class="itm-details">
-                                                <div class="itm-det">
-                                                    <span class="itm-title">Product Name:</span><span class="itm-prop">30" x 40" Interior Pizza Bowls Window Cling</span>
-                                                </div>
-                                                <div class="itm-det">
-                                                    <span class="itm-title">Service:</span><span class="itm-prop">Direct Mail</span>
-                                                </div>
-                                                <div class="itm-det">
-                                                    <span class="itm-title">Grand Total:</span><span class="itm-prop">$7,469.00</span>
-                                                </div>
-                                                <div class="itm-det">
-                                                    <span class="itm-title">Total Due at Checkout:</span><span class="itm-prop">$0.00</span>
-                                                </div>
-                                                    <span class="itm-showmore link">View Details</span>
+                                        <div class="order-right">
+                                            <span class="view-order link" value="${_orders[i].orderNum}">View Order</span>
+                                            <span class="go-back link" value="${_orders[i].orderNum}">Return</span>
+                                        </div>
+                        
+                                    </div>
+                                    <p class="order-detail items"><span class="prop">${_orders[i].items.length}</span> Item(s) <span class="view-items link">Show Items</span></p>
+                                    <div class="items-details">
+                                        <div class=".items-store">
+                                            <div class="items-storename">Tiffin <i class="fas fa-chevron-right fa-sm"></i></div>
+                                            <div class="items-items" >
+                                                <p class="item-container"><span class="item">${theItem.name}</span> <span class="view-item link" value="${theItem.id}">View Details</span></p>
+                                                <p class="item-container"><span class="item">${theItem.name}</span> <span class="view-item link" value="${theItem.id}">View Details</span></p>
+                                                <p class="item-container"><span class="item">${theItem.name}</span> <span class="view-item link" value="${theItem.id}">View Details</span></p>
+                                                <p class="item-container"><span class="item">${theItem.name}</span> <span class="view-item link" value="${theItem.id}">View Details</span></p>
+                                                <p class="item-container"><span class="item">${theItem.name}</span> <span class="view-item link" value="${theItem.id}">View Details</span></p>
                                             </div>
                                         </div>
-                                    </div> -->
-                                <!-- </div> -->
-                                
-                                        <!--<div class="order-right">
-                                            <span class="link">View Order</span>
-                                        </div> -->
-
+                                    </div>
+                                </div> -->
                         </div>
-
-
                     </div>
-
 
                 </div>
                 
@@ -176,7 +211,7 @@
                     View Order Page ↓ ↓ ↓
                 -->
 
-                <div class="page-content" id="page-view">
+                <!-- <div class="page-content" id="page-view">
 
                     <h4 class="det-head">
                         Order #123456
@@ -185,11 +220,19 @@
 
                     </div>
 
-                </div>
+                </div> -->
         </div>
     
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.5/dayjs.min.js" integrity="sha512-n6mJ6AqoohFfbgx3x7N162B/zRNs5x8uvsStlHC+LCvqwKW7oiucE07Ehatg62ybx6Vo1ctaZwm/4sSRUTSIQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <script src="./js/jquery-datepicker/jquery-ui.min.js" type="text/javascript"></script>
+
+
+        <script src="js/print.min.js"  type="text/javascript"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
         <script type="module" src="js/app.js"></script>
         <script type="module" src="js/orders.js"></script>
 
