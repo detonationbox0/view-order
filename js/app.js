@@ -665,8 +665,9 @@ $(document).on("click", "#search-button", function() {
     var typed = $("#search-text").val().toLowerCase(); // Full value of the text field
 
     if (typed == "") {
-        // Cleared. Show all orders
-        $(".order").show();
+        // Cleared. Reset filter to whatever is selected
+        var sel = $('#date-sel').trigger("change");
+
     } else {
         // Loop orders and hide if the order content does not include typed text
         var orders = $(".order");
